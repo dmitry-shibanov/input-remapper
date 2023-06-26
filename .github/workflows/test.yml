@@ -25,6 +25,7 @@ jobs:
         # Install deps as root since we will run tests as root
         sudo scripts/ci-install-deps.sh
         sudo pip install --no-binary :all: .
+    - run: python --version
     - name: Run tests
       run: |
         # FIXME: Had some permissions issues, currently worked around by running tests as root

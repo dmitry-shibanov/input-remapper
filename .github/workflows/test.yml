@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.7", "3.11"] # min and max supported versions?
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"] # min and max supported versions?
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -17,8 +18,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         # broken "Error: Cache folder path is retrieved for pip but doesn't exist on disk: /home/runner/.cache/pip"
-        # cache: 'pip'
-        # cache-dependency-path: setup.py
+        cache: 'pip'
+        cache-dependency-path: setup.py
     - name: Install dependencies
       run: |
         # Install deps as root since we will run tests as root

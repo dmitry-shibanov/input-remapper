@@ -36,3 +36,4 @@ jobs:
         # find / -type f -name "input-remapper.glade"
 
         sudo -E python tests/test.py --start-dir unit
+    - run: ls $(pip cache dir)
